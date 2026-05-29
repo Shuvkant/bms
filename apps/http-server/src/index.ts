@@ -5,7 +5,9 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hi there,this is the http server')
+  res.send(
+    'Hi there,this is the http server, changes made in here are synced using cicd',
+  )
 })
 
 app.post('/signup', async (req, res) => {
