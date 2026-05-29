@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "exports": {
-    "./client": "./dist/src/index.js"
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "node ./scripts/fix-prisma-imports.cjs"
   },
+  "exports": {
+    "./client": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    }
+  },
+  "types": "./dist/src/index.d.ts",
   "keywords": [],
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
