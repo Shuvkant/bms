@@ -10,9 +10,10 @@ jobs:
     steps:
       - run: |
           echo "${{ secrets.AZURE_KEY }}" &> ~/ssh_key
-          mkdir -p /home/runner/.ssh
-          ls /home/runner/.ssh
-          touch /home/runner/.ssh/known_hosts
-          echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
+          # mkdir -p /home/runner/.ssh
+          # ls /home/runner/.ssh
+          # touch /home/runner/.ssh/known_hosts
+          # echo "${{ secrets.KNOWN_HOSTS  -0}}" &> /home/runner/.ssh/known_hosts
+
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/ssh_key azureuser@20.197.11.199 -t "cd bms/ && git pull origin main && export PATH=/home/azureuser/.nvm/versions/node/v24.8.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm install -g pnpm && pnpm install && pnpm run build && pm2 restart fe-server && pm2 restart http-server && pm2 restart ws-sever"
+          ssh -i ~/ssh_key  -o StrictCostKeyChecking=no azureuser@20.197.11.199 -t "cd bms/ && git pull origin main && export PATH=/home/azureuser/.nvm/versions/node/v24.8.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm install -g pnpm && pnpm install && pnpm run build && pm2 restart fe-server && pm2 restart http-server && pm2 restart ws-sever"
